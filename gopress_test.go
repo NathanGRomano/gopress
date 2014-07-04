@@ -87,3 +87,10 @@ func TestDisabled(t *testing.T) {
 		t.Error("checking if something is disable should return true")
 	}
 }
+
+func TestSetEngine(t *testing.T) {
+	app := Gopress()
+	key := "html"
+	engine := func(req Request, res Response, next func(err interface{})) {}
+	app.SetEngine(key, engine)
+}

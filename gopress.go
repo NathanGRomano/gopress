@@ -1,5 +1,17 @@
 package gopress
 
+type Request struct {
+}
+
+type Response struct {
+}
+
+type Cb func(err interface{})
+
+type Fn func(req Request, res Response, next Cb)
+
+type ErrFn func(err interface{}, req Request, res Resopnse, next Cb)
+
 type Application struct {
 	cache    map[string]interface{}
 	settings map[string]interface{}
@@ -45,4 +57,12 @@ func (a *Application) Disable(name string) *Application {
 
 func (a *Application) Disabled(name string) bool {
 	return a.Get(name) == false
+}
+
+func (a *Application) SetEngine(name string, fn Fn) *Application {
+	if !HasPrefix(name, ".") {
+		name = "." + name
+	}
+	a.engines[name] = fn
+	return a
 }
