@@ -30,3 +30,7 @@ func (a *Application) Set(name string, val interface{}) *Application {
 func (a *Application) Get(name string) interface{} {
 	return a.settings[name]
 }
+
+func (a *Application) Enable(name string) *Application {
+	return a.Set(name, true)
+}

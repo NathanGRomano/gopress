@@ -49,3 +49,11 @@ func TestGet(t *testing.T) {
 		t.Error("can't get value")
 	}
 }
+
+func TestEnable(t *testing.T) {
+	app := Gopress()
+	key := "key"
+	if x := app.Enable(key).Get(key); x != true {
+		t.Error("can't enable")
+	}
+}
