@@ -15,7 +15,7 @@ func TestUse(t *testing.T) {
 	if x := app.Use(fn); x != app {
 		t.Error("Expected app to return itself")
 	}
-	if app.fns.Len() != 1 {
+	if len(app.fns) != 1 {
 		t.Error("Expected fns length to be \"1\"")
 	}
 }
