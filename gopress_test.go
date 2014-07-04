@@ -68,3 +68,22 @@ func TestEnabledd(t *testing.T) {
 		t.Error("we do not have a value so it should be false")
 	}
 }
+
+func TestDisable(t *testing.T) {
+	app := Gopress()
+	key := "key"
+	if x := app.Disable(key).Get(key); x != false {
+		t.Error("disabling a key should have a value of false")
+	}
+}
+
+func TestDisabled(t *testing.T) {
+	app := Gopress()
+	key := "key"
+	if x := app.Disable(key).Disabled(key); x != true {
+		t.Error("checking if a disabled value should be false")
+	}
+	if x := app.Disabled("other"); x != false {
+		t.Error("checking if something is disable should return true")
+	}
+}

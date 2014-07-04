@@ -38,3 +38,11 @@ func (a *Application) Enable(name string) *Application {
 func (a *Application) Enabled(name string) bool {
 	return a.Get(name) == true
 }
+
+func (a *Application) Disable(name string) *Application {
+	return a.Set(name, false)
+}
+
+func (a *Application) Disabled(name string) bool {
+	return a.Get(name) == false
+}
