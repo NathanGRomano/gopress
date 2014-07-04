@@ -57,3 +57,14 @@ func TestEnable(t *testing.T) {
 		t.Error("can't enable")
 	}
 }
+
+func TestEnabledd(t *testing.T) {
+	app := Gopress()
+	key := "key"
+	if x := app.Enable(key).Enabled(key); x != true {
+		t.Error("we called enable but the key isn't enabled")
+	}
+	if x := app.Enabled("other"); x != false {
+		t.Error("we do not have a value so it should be false")
+	}
+}

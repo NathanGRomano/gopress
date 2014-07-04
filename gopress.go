@@ -34,3 +34,7 @@ func (a *Application) Get(name string) interface{} {
 func (a *Application) Enable(name string) *Application {
 	return a.Set(name, true)
 }
+
+func (a *Application) Enabled(name string) bool {
+	return a.Get(name) == true
+}
