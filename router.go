@@ -1,17 +1,21 @@
 package gopress
 
 type Router struct {
-	options map[string]interface{}
+	caseSensitive bool
+	strict        bool
 }
 
-func NewRouter(options *map[string]interface{}) *Router {
-	router = new(Router)
-	router.options = make(map[string]interface{})
-	router.options["caseSensitive"] = false
-	router.options["strict"] = false
+func NewRouter(options map[string]bool) *Router {
+	router := new(Router)
+	router.caseSensitive = false
+	router.strict = false
 	if options != nil {
-		router.options["caseSensitive"] = options["caseSensitive"] || false
-		router.options["strict"] = options["strict"] || false
+		if v, ok := options["caseSensitive"]; ok {
+			router.caseSensitive = v
+		}
+		if v, ok := options["strict"]; ok {
+			router.strict = v
+		}
 	}
 	return router
 }

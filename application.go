@@ -10,6 +10,7 @@ type Application struct {
 	cache    map[string]interface{}
 	settings map[string]interface{}
 	engines  map[string]*Fn
+	router   *Router
 }
 
 func NewApplication() *Application {
@@ -63,7 +64,11 @@ func (a *Application) Engine(name string) *Fn {
 }
 
 func (a *Application) Router() *Router {
-	if !a.router {
+	if a.router == nil {
+		conf := map[string]bool{
+			"caseSensitive": a.Enabled("case sensitive routing"),
+			"strict":        a.Enabled("strict routing"),
+		}
 		a.router = NewRouter(conf)
 		// TODO we need to put in query and middleware
 	}

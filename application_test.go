@@ -107,7 +107,7 @@ func TestGetEngine(t *testing.T) {
 	}
 }
 
-func TestRouter(t *testiong.T) {
+func TestRouter(t *testing.T) {
 	app := NewApplication()
 	if x := app.Router(); x == nil {
 		t.Error("the router must be set")
