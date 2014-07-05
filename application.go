@@ -62,6 +62,14 @@ func (a *Application) Engine(name string) *Fn {
 	return a.engines[prefix(name)]
 }
 
+func (a *Application) Router() *Router {
+	if !a.router {
+		a.router = NewRouter(conf)
+		// TODO we need to put in query and middleware
+	}
+	return a.router
+}
+
 func prefix(name string) string {
 	if !strings.HasPrefix(name, ".") {
 		name = "." + name

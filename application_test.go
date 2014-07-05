@@ -106,3 +106,10 @@ func TestGetEngine(t *testing.T) {
 		t.Error("after setting an engine we must be able to get it")
 	}
 }
+
+func TestRouter(t *testiong.T) {
+	app := NewApplication()
+	if x := app.Router(); x == nil {
+		t.Error("the router must be set")
+	}
+}
