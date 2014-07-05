@@ -16,6 +16,7 @@ func TestNewRouter(t *testing.T) {
 	config := map[string]bool{
 		"caseSensitive": true,
 		"strict":        true,
+		"mergeParams":   true,
 	}
 	b := NewRouter(config)
 	if b.caseSensitive != true {
@@ -23,5 +24,8 @@ func TestNewRouter(t *testing.T) {
 	}
 	if b.strict != true {
 		t.Error("strict must be true when set in the config")
+	}
+	if b.mergeParams != true {
+		t.Error("mergeParams must be true when set in the config")
 	}
 }

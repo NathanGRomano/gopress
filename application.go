@@ -4,6 +4,7 @@ import "strings"
 
 type Fn func(req Request, res Response, next Cb)
 type ErrFn func(err interface{}, req Request, res Response, next Cb)
+type ParamFn func(req Request, res Response, next Cb, id interface{})
 type Cb func(err interface{})
 
 type Application struct {
