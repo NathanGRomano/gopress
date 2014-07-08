@@ -82,3 +82,8 @@ func prefix(name string) string {
 	}
 	return name
 }
+
+func (a *Application) Use(path *string, fn *Fn) *Application {
+	a.Router().Use(path, fn)
+	return a
+}

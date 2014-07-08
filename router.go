@@ -30,3 +30,7 @@ func NewRouter(options map[string]bool) *Router {
 	}
 	return router
 }
+
+func (r *Router) Use(path *string, fn *Fn) *Router {
+	return r
+}

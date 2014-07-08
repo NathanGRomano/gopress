@@ -2,14 +2,14 @@ package gopress
 
 import "testing"
 
-func TestNewApplication(t *testing.T) {
+func TestApplicationNewApplication(t *testing.T) {
 	var app = NewApplication()
 	if app == nil {
 		t.Error("App should be defined")
 	}
 }
 
-func TestInit(t *testing.T) {
+func TestApplicationInit(t *testing.T) {
 	var app = new(Application)
 	app.Init()
 	if app.settings == nil {
@@ -23,13 +23,13 @@ func TestInit(t *testing.T) {
 	}
 }
 
-func TestDefaultConfiguration(t *testing.T) {
+func TestApplicationDefaultConfiguration(t *testing.T) {
 	var app = new(Application)
 	app.Init()
 	app.DefaultConfiguration()
 }
 
-func TestSet(t *testing.T) {
+func TestApplicationSet(t *testing.T) {
 	app := NewApplication()
 	key := "key"
 	val := "value"
@@ -39,7 +39,7 @@ func TestSet(t *testing.T) {
 	}
 }
 
-func TestGet(t *testing.T) {
+func TestApplicationGet(t *testing.T) {
 	app := NewApplication()
 	key := "key"
 	val := "value"
@@ -50,7 +50,7 @@ func TestGet(t *testing.T) {
 	}
 }
 
-func TestEnable(t *testing.T) {
+func TestApplicationEnable(t *testing.T) {
 	app := NewApplication()
 	key := "key"
 	if x := app.Enable(key).Get(key); x != true {
@@ -58,7 +58,7 @@ func TestEnable(t *testing.T) {
 	}
 }
 
-func TestEnabledd(t *testing.T) {
+func TestApplicationEnabledd(t *testing.T) {
 	app := NewApplication()
 	key := "key"
 	if x := app.Enable(key).Enabled(key); x != true {
@@ -69,7 +69,7 @@ func TestEnabledd(t *testing.T) {
 	}
 }
 
-func TestDisable(t *testing.T) {
+func TestApplicationDisable(t *testing.T) {
 	app := NewApplication()
 	key := "key"
 	if x := app.Disable(key).Get(key); x != false {
@@ -77,7 +77,7 @@ func TestDisable(t *testing.T) {
 	}
 }
 
-func TestDisabled(t *testing.T) {
+func TestApplicationDisabled(t *testing.T) {
 	app := NewApplication()
 	key := "key"
 	if x := app.Disable(key).Disabled(key); x != true {
@@ -88,7 +88,7 @@ func TestDisabled(t *testing.T) {
 	}
 }
 
-func TestSetEngine(t *testing.T) {
+func TestApplicationSetEngine(t *testing.T) {
 	app := NewApplication()
 	key := "html"
 	engine := new(Fn)
@@ -98,7 +98,7 @@ func TestSetEngine(t *testing.T) {
 	}
 }
 
-func TestGetEngine(t *testing.T) {
+func TestApplicationGetEngine(t *testing.T) {
 	app := NewApplication()
 	key := "html"
 	engine := new(Fn)
@@ -107,9 +107,24 @@ func TestGetEngine(t *testing.T) {
 	}
 }
 
-func TestRouter(t *testing.T) {
+func TestApplicationRouter(t *testing.T) {
 	app := NewApplication()
 	if x := app.Router(); x == nil {
 		t.Error("the router must be set")
+	}
+}
+
+func TestApplicationUse(t *testing.T) {
+	app := NewApplication()
+	fn := new(Fn)
+	app.Use(nil, fn)
+	var found bool = false
+	for _, x := range app.Router().stack {
+		if &x.handle == fn {
+			found = true
+		}
+	}
+	if !found {
+		t.Error("the fn should have been delegated to Router#use")
 	}
 }
